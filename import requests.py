@@ -30,15 +30,16 @@ while True:
             print(str(api.rate_limit.limit), str(api.rate_limit.remaining),str(api.rate_limit.reset+datetime.timedelta(hours=9)))
 
     time_updated = devices[0].newest_events['te'].created_at+datetime.timedelta(hours=9)
-    print("time_updated:", time_updated)
+    print("latest_time_updated:", time_updated)
     #正常に更新されているので次の更新を待つ
     if time_updated_old != "" and api.rate_limit.remaining>1:
-        print("Updated:", time_updated)
+        print("data_Updated_at:", time_updated)
         time_updated_old = time_updated
-        time.sleep(900)
+        print("Next Access time:",datetime.datetime.now()+datetime.timedelta(seconds=300))
+        time.sleep(300)
     #正常に更新されていないので更新を急かす
     else:
-        print("Not updated:", time_updated)
+        print("data_Not_updated_at:", time_updated)
         #待ち時間を設定
         times_remain = api.rate_limit.reset+datetime.timedelta(hours=9)-datetime.datetime.now()
         print("Waiting time:", times_remain)
