@@ -107,9 +107,11 @@ while True:
     ax1.xaxis.set_major_locator(locator)
     ax1.xaxis.set_major_formatter(formatter)
 
-    ax1.set_xlim([min(time_list), max(time_list)])
-    ax1.set_ylim([min(min(temp_lists))-1, max(max(temp_lists))+1])
-    ax2.set_ylim([min(min(hum_lists))-5, max(max(hum_lists))+5])
+    if len(time_list) > 1:
+        ax1.set_xlim([min(time_list), max(time_list)])
+    if len(temp_lists) > 0 and len(hum_lists) > 0 and len(temp_lists[0]) > 0:
+        ax1.set_ylim([min(min(temp_lists))-1, max(max(temp_lists))+1])
+        ax2.set_ylim([min(min(hum_lists))-5, max(max(hum_lists))+5])
 
     matplotlib.pyplot.rcParams['font.size'] = 10
     fig.subplots_adjust(left=0.25, right=0.95, top=0.9, bottom=0.15)
