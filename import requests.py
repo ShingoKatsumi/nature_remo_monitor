@@ -21,7 +21,7 @@ if api.rate_limit.remaining == 30:
 else:
     print("Initial wait until rate limit reset at", api.rate_limit.reset+datetime.timedelta(hours=9))
     time.sleep((api.rate_limit.reset+datetime.timedelta(hours=9)-datetime.datetime.now()).seconds)
-
+    
 # データ保存用リスト
 time_list = []
 device_name_lists = []
@@ -109,6 +109,8 @@ while True:
 
     if len(time_list) > 1:
         ax1.set_xlim([min(time_list), max(time_list)])
+    else:
+        ax1.set_xlim([datetime.datetime.now()-datetime.timedelta(minutes=10), datetime.datetime.now()+datetime.timedelta(minutes=10)])
     if len(temp_lists) > 0 and len(hum_lists) > 0 and len(temp_lists[0]) > 0:
         ax1.set_ylim([min(min(temp_lists))-1, max(max(temp_lists))+1])
         ax2.set_ylim([min(min(hum_lists))-5, max(max(hum_lists))+5])
