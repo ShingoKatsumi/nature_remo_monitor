@@ -93,8 +93,8 @@ while True:
                 del row[0]
             for row in hum_lists:
                 del row[0]
-        ax1.plot(time_list, temp_lists[devices.index(device)], label='Temperature (°C)_'+device.name, color=plt.get_cmap('tab10')(devices.index(device)), linestyle='solid', marker='o')
-        ax2.plot(time_list, hum_lists[devices.index(device)], label='Humidity (%)_'+device.name, color=plt.get_cmap('tab10')(devices.index(device)), linestyle='dotted', marker='x')
+        ax1.plot(time_list, temp_lists[devices.index(device)], label='Temp_'+device.name, color=plt.get_cmap('tab10')(devices.index(device)), linestyle='solid', marker='o')
+        ax2.plot(time_list, hum_lists[devices.index(device)], label='Humid_'+device.name, color=plt.get_cmap('tab10')(devices.index(device)), linestyle='dotted', marker='x')
         # 凡例をまとめて表示
         h1, l1 = ax1.get_legend_handles_labels()
         h2, l2 = ax2.get_legend_handles_labels()
@@ -111,6 +111,12 @@ while True:
     ax1.set_ylim([min(min(temp_lists))-1, max(max(temp_lists))+1])
     ax2.set_ylim([min(min(hum_lists))-5, max(max(hum_lists))+5])
 
+    matplotlib.pyplot.rcParams['font.size'] = 10
+    fig.subplots_adjust(left=0.25, right=0.95, top=0.9, bottom=0.15)
+
+    ax2.spines['left'].set_position(('axes', -0.2))
+    ax2.yaxis.set_ticks_position('left') 
+    ax2.yaxis.set_label_position('left') 
     plt.pause(10)  # グラフを更新
 
     print("go to next step")
